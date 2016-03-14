@@ -94,7 +94,8 @@ Here's how to start:
 3. **Run the server with the correct configuration**
  7. Back on SSH or your terminal, add the following lines to your `~/.bash_profile`
     - `export MATTERMOST_GIPHY_TOKEN=<your-token-here>` This is the token you copied in the last section
-    - `export MATTERMOST_GIPHY_PORT=<your-port-number>` The port number you want the integration to listen on (defaults to 5000)
+    - `export MATTERMOST_GIPHY_HOST=<your-host>` or `export HOST=<your-host>` The host yu want the integration (defaults to 127.0.0.1)
+    - `export MATTERMOST_GIPHY_PORT=<your-port-number>` or `export PORT=<you-port-number>` The port number you want the integration to listen on (defaults to 5000)
  8. Source your bash profile
     - `source ~/.bash_profile`
  9. Run the server

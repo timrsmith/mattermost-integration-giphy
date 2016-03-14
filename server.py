@@ -57,7 +57,8 @@ def new_post():
         return 'OK'
 
     resp_data = {}
-    resp_data['text'] = gif_url
+    resp_data['text'] = '''`{}` searched for {}
+{}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
     resp_data['username'] = USERNAME
     resp_data['icon_url'] = ICON_URL
     if slash_command:

@@ -50,6 +50,18 @@ Here's how to start:
  5. Go back to your Heroku app dashboard under the *Settings* tab. Under the *Config Variables* section, click **Reveal Config Vars**
  6. Type `MATTERMOST_TOKEN` as the *KEY* and paste in the token you copied as the *VALUE*, and click **Add**
 
+3. **Connect your project to your Mattermost account for outgoing webhooks**
+ 1. Log in to your Mattermost account. Click the three dot menu at the top of the left-hand side and go to **Account Settings** > **Integrations** > **Slash Commands**
+ 2. Under *Add a new slash commands*
+   1. enter `gif:` into **Trigger Words**.
+   2. add yout callback URL.
+   3. choose `POST` method.
+   4. choose a username/icon url.
+ 3. Paste your Heroku domain into *Callback URLs*, making sure to add `http://` to the beginning and `/new_post` to the end so it looks similar to `http://myapp.heroku.com/new_post` and click **Add**
+ 4. Copy the *Token* from your newly created webhook that appears under the *Existing outgoing webhooks* section
+ 5. Go back to your Heroku app dashboard under the *Settings* tab. Under the *Config Variables* section, click **Reveal Config Vars**
+ 6. Type `MATTERMOST_TOKEN` as the *KEY* and paste in the token you copied as the *VALUE*, and click **Add**
+
 That's it! Waiting a few minutes for the Heroku process to restart you should be able to type `gif: hello` into any channel and see a GIF from Gihpy's translate service.
 
 ### Linux/Ubuntu 14.04 Web Server Install

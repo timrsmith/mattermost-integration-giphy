@@ -37,7 +37,14 @@ def new_post():
         print('Tokens did not match, it is possible that this request came from somewhere other than Mattermost')
         return 'OK'
 
-    translate_text = data['text'][len(data['trigger_word']):]
+    # NOTE: support the slash command
+    slash_command = False
+    if 'command' in data:
+        slash_command = True
+
+    translate_text = data['text']
+    if not slash_command:
+        translate_text = data['text'][len(data['trigger_word']):]
 
     if len(translate_text) == 0:
         print("No translate text provided, not hitting Giphy")
@@ -53,6 +60,8 @@ def new_post():
     resp_data['text'] = gif_url
     resp_data['username'] = USERNAME
     resp_data['icon_url'] = ICON_URL
+    if slash_command:
+        resp_data['response_type'] = 'in_channel'
 
     resp = Response(content_type='application/json')
     resp.set_data(json.dumps(resp_data))

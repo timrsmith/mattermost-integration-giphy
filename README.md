@@ -82,7 +82,7 @@ Here's how to start:
     - `git clone https://github.com/mattermost/mattermost-integration-giphy.git`
     - `cd mattermost-integration-giphy`
  6. Install integration requirements
-    - `sudo pip install -r requirements.txt`
+    - `sudo python setup.py install`
 
 2. **Set up your Mattermost outgoing webhooks**
  1. Log in to your Mattermost account. Click the three dot menu at the top of the left-hand side and go to **Account Settings** > **Integrations** > **Outgoing Webhooks**
@@ -107,7 +107,7 @@ Here's how to start:
  2. Source your bash profile
     - `source ~/.bash_profile`
  3. Run the server
-    - `python server.py`
+    - `python run.py`
 
 That's it! You should be able to type `gif: hello` or `/gif hello` into any channel and see a GIF from Giphy's translate service.
 
@@ -128,4 +128,4 @@ If you'd like to use this integration in a production envrionment, it is strongl
 2. Source your bash profile
    - `source ~/.bash_profile` or `source ~/.bashrc`
 3. Run the server again
-   - `python server.py`
+   - `python run.py`

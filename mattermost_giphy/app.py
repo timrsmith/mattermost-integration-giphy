@@ -1,21 +1,20 @@
+# -*- coding: utf-8 -*-
 import os
 import sys
-import requests
 import json
-from urlparse import urlsplit,urlunsplit
+from urlparse import urlsplit
+from urlparse import urlunsplit
+
+import requests
 from flask import Flask
 from flask import request
 from flask import Response
 
+from mattermost_giphy.settings import *
+
+
 app = Flask(__name__)
 
-USERNAME = 'giphy' # username the bot posts as
-ICON_URL = 'https://api.giphy.com/img/api_giphy_logo.png' # display picture the bot posts with
-RATING = 'pg' # the maximum parental rating of gifs posted (y, pg, pg-13, r)
-SCHEME = 'https' # scheme to be used for the gif url returned to mattermost
-
-GIPHY_API_KEY = 'dc6zaTOxFJmzC' # this is a public beta key, for production use you must go to http://api.giphy.com/submit and request a production key
-MATTERMOST_GIPHY_TOKEN = '' # the Mattermost token generated when you created your outgoing webhook
 
 @app.route('/')
 def root():
@@ -24,6 +23,7 @@ def root():
     """
 
     return "OK"
+
 
 @app.route('/new_post', methods=['POST'])
 def new_post():
@@ -69,6 +69,7 @@ def new_post():
 
     return resp
 
+
 def giphy_translate(text):
     """
     Giphy translate method, uses the Giphy API to find an appropriate gif url
@@ -89,25 +90,5 @@ def giphy_translate(text):
 
     url = list(urlsplit(resp_data['data']['images']['original']['url']))
     url[0] = SCHEME.lower()
+
     return urlunsplit(url)
-
-
-if __name__ == "__main__":
-    USERNAME = os.environ.get('USERNAME', USERNAME)
-    ICON_URL = os.environ.get('ICON_URL', ICON_URL)
-    RATING = os.environ.get('RATING', RATING)
-    SCHEME = os.environ.get('SCHEME', SCHEME)
-    GIPHY_API_KEY = os.environ.get('GIPHY_API_KEY', GIPHY_API_KEY)
-    MATTERMOST_GIPHY_TOKEN = os.environ.get('MATTERMOST_GIPHY_TOKEN', MATTERMOST_GIPHY_TOKEN)
-
-    if len(GIPHY_API_KEY) == 0:
-        print("GIPHY_API_KEY must be configured. Please see README.md for instructions")
-        sys.exit()
-
-    if len(MATTERMOST_GIPHY_TOKEN) == 0:
-        print("MATTERMOST_GIPHY_TOKEN must be configured. Please see README.md for instructions")
-        sys.exit()
-
-    port = os.environ.get('MATTERMOST_GIPHY_PORT', None) or os.environ.get('PORT', 5000)
-    host = os.environ.get('MATTERMOST_GIPHY_HOST', None) or os.environ.get('HOST', '127.0.0.1')
-    app.run(host=str(host), port=int(port))

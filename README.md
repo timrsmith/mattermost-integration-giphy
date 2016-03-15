@@ -50,19 +50,18 @@ Here's how to start:
  5. Go back to your Heroku app dashboard under the *Settings* tab. Under the *Config Variables* section, click **Reveal Config Vars**
  6. Type `MATTERMOST_TOKEN` as the *KEY* and paste in the token you copied as the *VALUE*, and click **Add**
 
-3. **Connect your project to your Mattermost account for outgoing webhooks**
+4. **Connect your project to your Mattermost account for slash commands**
  1. Log in to your Mattermost account. Click the three dot menu at the top of the left-hand side and go to **Account Settings** > **Integrations** > **Slash Commands**
- 2. Under *Add a new slash commands*
-   1. enter `gif:` into **Trigger Words**.
-   2. add yout callback URL.
-   3. choose `POST` method.
-   4. choose a username/icon url.
- 3. Paste your Heroku domain into *Callback URLs*, making sure to add `http://` to the beginning and `/new_post` to the end so it looks similar to `http://myapp.heroku.com/new_post` and click **Add**
- 4. Copy the *Token* from your newly created webhook that appears under the *Existing outgoing webhooks* section
- 5. Go back to your Heroku app dashboard under the *Settings* tab. Under the *Config Variables* section, click **Reveal Config Vars**
- 6. Type `MATTERMOST_TOKEN` as the *KEY* and paste in the token you copied as the *VALUE*, and click **Add**
+ 2. Under *Add a new command*, enter `/gif` into **Command Trigger Word**
+ 3. Paste your Heroku domain into *Callback URLs*, making sure to add `http://` to the beginning
+ 4. Select `POST` method
+ 5. (optional) Choose a username and icon url
+ 6. (optional) Check the autocomplete checkbox, add `[KEYWORD]` as the hint, `Returns a GIF from Giphy based on the keyword` as the description and `Get a GIF from Giphy` as the descriptive label
+ 7. Copy the *Token* from your newly created slash command that appears under the *Existing commands* section
+ 8. Go back to your Heroku app dashboard under the *Settings* tab. Under the *Config Variables* section, click **Reveal Config Vars**
+ 9. Type `MATTERMOST_TOKEN` as the *KEY* and paste in the token you copied as the *VALUE*, and click **Add**
 
-That's it! Waiting a few minutes for the Heroku process to restart you should be able to type `gif: hello` into any channel and see a GIF from Gihpy's translate service.
+That's it! Waiting a few minutes for the Heroku process to restart you should be able to type `gif: hello` or `/gif hello` into any channel and see a GIF from Giphy's translate service.
 
 ### Linux/Ubuntu 14.04 Web Server Install
 
@@ -89,19 +88,28 @@ Here's how to start:
  1. Log in to your Mattermost account. Click the three dot menu at the top of the left-hand side and go to **Account Settings** > **Integrations** > **Outgoing Webhooks**
  2. Under *Add a new outgoing webhook*, leave the *Channel* unselected and enter `gif:` into *Trigger Words*. You may select a channel if you only want this integration to be available in a specified channel
  3. Paste your Web Server domain into *Callback URLs*, making sure to add `http://` to the beginning and `/new_post` to the end so it looks similar to `http://<your-web-server-domain>/new_post` and click **Add**
- 4. Copy the *Token* from your newly created webhook that will under the *Existing outgoing webhooks* section
+ 4. Copy the *Token* from your newly created webhook that appears under the *Existing outgoing webhooks* section
 
-3. **Run the server with the correct configuration**
- 7. Back on SSH or your terminal, add the following lines to your `~/.bash_profile`
+3. **Set up your Mattermost slash command**
+ 1. Log in to your Mattermost account. Click the three dot menu at the top of the left-hand side and go to **Account Settings** > **Integrations** > **Slash Commands**
+ 2. Under *Add a new command*, enter `/gif` into **Command Trigger Word**
+ 3. Paste your Web Server domain into *Callback URLs*, making sure to add `http://` to the beginning
+ 4. Select `POST` method
+ 5. (optional) Choose a username and icon url
+ 6. (optional) Check the autocomplete checkbox, add `[KEYWORD]` as the hint, `Returns a GIF from Giphy based on the keyword` as the description and `Get a GIF from Giphy` as the descriptive label
+ 7. Copy the *Token* from your newly created slash command that appears under the *Existing commands* section
+
+4. **Run the server with the correct configuration**
+ 1. Back on SSH or your terminal, add the following lines to your `~/.bash_profile`
     - `export MATTERMOST_GIPHY_TOKEN=<your-token-here>` This is the token you copied in the last section
-    - `export MATTERMOST_GIPHY_HOST=<your-host>` or `export HOST=<your-host>` The host yu want the integration (defaults to 127.0.0.1)
+    - `export MATTERMOST_GIPHY_HOST=<your-host>` or `export HOST=<your-host>` The host you want the integration (defaults to 127.0.0.1)
     - `export MATTERMOST_GIPHY_PORT=<your-port-number>` or `export PORT=<you-port-number>` The port number you want the integration to listen on (defaults to 5000)
- 8. Source your bash profile
+ 2. Source your bash profile
     - `source ~/.bash_profile`
- 9. Run the server
+ 3. Run the server
     - `python server.py`
 
-That's it! You should be able to type `gif: hello` into any channel and see a GIF from Gihpy's translate service.
+That's it! You should be able to type `gif: hello` or `/gif hello` into any channel and see a GIF from Giphy's translate service.
 
 ### Production Setups
 

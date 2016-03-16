@@ -62,12 +62,12 @@ def new_post():
 
         gif_url = giphy_translate(translate_text)
         if not gif_url:
-            raise Exception('No gif url found, not returning a post to Mattermost')
+            raise Exception('No gif url found for `{}`'.format(translate_text))
 
         resp_data['text'] = '''`{}` searched for {}
     {}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
     except Exception as err:
-        msg = '{} {}'.format(err, err.message)
+        msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
         resp_data['text'] = msg
     finally:

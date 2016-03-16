@@ -86,7 +86,7 @@ def giphy_translate(text):
         params['rating'] = RATING
         params['api_key'] = GIPHY_API_KEY
 
-        resp = requests.get('https://api.giphy.com/v1/gifs/translate', params=params, verify=True)
+        resp = requests.get('{}://api.giphy.com/v1/gifs/translate'.format(SCHEME), params=params, verify=True)
 
         if resp.status_code is not requests.codes.ok:
             logging.error('Encountered error using Giphy API, text=%s, status=%d, response_body=%s' % (text, resp.status_code, resp.json()))

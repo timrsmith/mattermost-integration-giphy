@@ -30,7 +30,7 @@ To install this project using Heroku, you will need:
 Here's how to start:
 
 1. **Create a copy of this project to manipulate**
-  1. Log in to your GitHub account. Go to the [Github repository of this project](https://github.com/mattermost/mattermost-integration-giphy/) click **Fork** in the top-right corner to create a copy of this project that you can control and manipulate
+  1. Log in to your GitHub account. Go to the [Github repository of this project](https://github.com/numberly/mattermost-integration-giphy/) click **Fork** in the top-right corner to create a copy of this project that you can control and manipulate
 
 2. **Deploy your project copy to Heroku**
   1. Go to your [Heroku Dashboard](https://dashboard.heroku.com/apps) and click **+** in the top-right corner then **Create New App** 
@@ -79,7 +79,7 @@ Here's how to start:
  4. Install **pip** and other essentials
     - `sudo apt-get install python-pip python-dev build-essential`
  5. Clone this GitHub repo with
-    - `git clone https://github.com/mattermost/mattermost-integration-giphy.git`
+    - `git clone https://github.com/numberly/mattermost-integration-giphy.git`
     - `cd mattermost-integration-giphy`
  6. Install integration requirements
     - `sudo python setup.py install`

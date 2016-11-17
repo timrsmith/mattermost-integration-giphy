@@ -35,12 +35,12 @@ def new_post():
     """
     try:
         # NOTE: common stuff
+        data = request.form
+        
         slash_command = False
         resp_data = {}
         resp_data['username'] = data.get('user_name', USERNAME)
         #resp_data['icon_url'] = ICON_URL
-
-        data = request.form
 
         if not 'token' in data:
             raise Exception('Missing necessary token in the post data')

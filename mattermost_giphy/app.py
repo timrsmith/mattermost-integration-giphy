@@ -64,10 +64,8 @@ def new_post():
         if not gif_url:
             raise Exception('No gif url found for `{}`'.format(translate_text))
         
-        #resp_data['text'] = '''`{}` searched for {}
-    #{}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
-        resp_data['text'] = '''/gif {}
-    {}'''.format(translate_text, gif_url)
+        resp_data['text'] = '''`{}` /gif {}
+    {}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))

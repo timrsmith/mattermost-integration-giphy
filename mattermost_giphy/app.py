@@ -37,7 +37,7 @@ def new_post():
         # NOTE: common stuff
         slash_command = False
         resp_data = {}
-        #resp_data['username'] = USERNAME
+        resp_data['username'] = data.get('user_name', USERNAME)
         #resp_data['icon_url'] = ICON_URL
 
         data = request.form

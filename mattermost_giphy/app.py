@@ -37,8 +37,8 @@ def new_post():
         # NOTE: common stuff
         slash_command = False
         resp_data = {}
-        resp_data['username'] = USERNAME
-        resp_data['icon_url'] = ICON_URL
+        #resp_data['username'] = USERNAME
+        #resp_data['icon_url'] = ICON_URL
 
         data = request.form
 
@@ -63,9 +63,11 @@ def new_post():
         gif_url = giphy_translate(translate_text)
         if not gif_url:
             raise Exception('No gif url found for `{}`'.format(translate_text))
-
-        resp_data['text'] = '''`{}` searched for {}
-    {}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
+        
+        #resp_data['text'] = '''`{}` searched for {}
+    #{}'''.format(data.get('user_name', 'unknown').title(), translate_text, gif_url)
+        resp_data['text'] = '''/gif {}
+    {}'''.format(translate_text, gif_url)
     except Exception as err:
         msg = err.message
         logging.error('unable to handle new post :: {}'.format(msg))
